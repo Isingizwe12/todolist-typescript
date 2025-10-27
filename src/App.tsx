@@ -2,7 +2,7 @@
 import './App.css'
 
 import React, { useState } from "react";
-import TodoForm from './components/TodoForm'
+import TodoForm from './components/TodoForm';
 import TodoList from "./components/TodoList";
 
 export interface Todo {
