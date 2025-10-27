@@ -1,8 +1,5 @@
-
-import './App.css'
-
-import React, { useState } from "react";
-import TodoForm from './components/TodoForm'
+import React, { useState, useEffect } from "react";
+import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
 export interface Todo {
@@ -12,10 +9,17 @@ export interface Todo {
 }
 
 export default function App() {
-  // main todos state
-  const [todos, setTodos] = useState<Todo[]>([]);
+  // Load todos from localStorage initially
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const saved = localStorage.getItem("todos");
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  // add a new todo (called from TodoForm)
+  // Save todos to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   const addTodo = (text: string) => {
     const newTodo: Todo = {
       id: Date.now(),
@@ -28,27 +32,19 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-start justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-2xl">
-        {/* Card */}
         <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8">
-          {/* Header */}
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-semibold text-slate-800">
-              To-Do List
-            </h1>
-            <p className="text-md text-slate-500">Drag to re-order</p>
+            <h1 className="text-2xl font-semibold text-slate-800">To-Do List</h1>
+            <p className="text-sm text-slate-500">Drag to reorder</p>
           </div>
-
-          {/* Todo form (input + add button) */}
           <TodoForm onAdd={addTodo} />
-
-          {/* Spacer */}
           <div className="mt-6">
-            {/* TodoList will handle rendering + drag & drop */}
             <TodoList todos={todos} setTodos={setTodos} />
           </div>
         </div>
-
-      
+        <div className="text-center mt-6 text-sm text-slate-500">
+          Built with TypeScript • Tailwind CSS • @hello-pangea/dnd
+        </div>
       </div>
     </div>
   );
