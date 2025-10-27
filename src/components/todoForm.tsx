@@ -22,18 +22,18 @@ export default function TodoForm({ onAdd }: TodoFormProps) {
   };
 
   return (
-    <div className="flex gap-2 mt-4">
+    <div className="flex flex-col sm:flex-row gap-2 mt-4">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleEnterKey}
         placeholder="Enter a new task"
-        className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full sm:w-auto"
       />
       <button
         onClick={handleSubmit}
-        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition w-full sm:w-auto"
       >
         Add
       </button>

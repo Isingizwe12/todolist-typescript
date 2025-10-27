@@ -26,10 +26,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-start justify-center py-12 px-4">
+    <div className="min-h-screen bg-gray-50 flex items-start justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-2xl">
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-md p-6">
+        <div className="bg-white rounded-2xl shadow-md p-6 sm:p-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl font-semibold text-slate-800">
