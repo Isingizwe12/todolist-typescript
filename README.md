@@ -22,6 +22,9 @@ Tailwind CSS
 
 @hello-pangea/dnd (for drag & drop functionality)
 
+
+# Project Structure
+
 ```
 src/
 │  App.tsx        # Main app container & state
