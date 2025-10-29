@@ -1,57 +1,50 @@
-import type { Todo } from "../App";
-import type { Dispatch, SetStateAction } from "react";
+import React from "react";
 
-interface TodoItemProps {
-  todo: Todo;
-  todos: Todo[];
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
-}
+type TaskItemProps = {
+  id: string;
+  text: string;
+  done: boolean;
+  onToggle: () => void;
+  onDelete: () => void;
+};
 
-export default function TodoItem({ todo, todos, setTodos }: TodoItemProps) {
-  // Toggle completed state
-  const toggleCompleted = () => {
-    const updated = todos.map((t) =>
-      t.id === todo.id ? { ...t, completed: !t.completed } : t
-    );
-    setTodos(updated);
-  };
-
-  // Delete todo
-  const deleteTodo = () => {
-    const updated = todos.filter((t) => t.id !== todo.id);
-    setTodos(updated);
-  };
-
+export default function TaskItem({
+  text,
+  done,
+  onToggle,
+  onDelete,
+}: TaskItemProps) {
   return (
-    <div className="flex items-center justify-between w-full">
-      {/* Task text */}
-      <div
-        className={`flex-1 text-slate-800 ${
-          todo.completed ? "line-through text-slate-400" : ""
-        }`}
+    <div
+      className={`flex justify-between items-center w-72 px-5 py-4 rounded-2xl border border-white/40 backdrop-blur-md shadow-md bg-gradient-to-r ${
+        done
+          ? "from-emerald-200 to-green-100"
+          : "from-indigo-100 to-pink-100"
+      } transition-all duration-300`}
+    >
+      <div className="flex items-center gap-3">
+        <input
+          type="checkbox"
+          checked={done}
+          onChange={onToggle}
+          className="w-5 h-5 accent-indigo-600"
+        />
+        <span
+          className={`text-lg ${
+            done
+              ? "line-through text-gray-400"
+              : "text-indigo-800 font-semibold"
+          }`}
+        >
+          {text}
+        </span>
+      </div>
+      <button
+        onClick={onDelete}
+        className="text-red-500 hover:text-red-700 font-bold text-xl"
       >
-        {todo.text}
-      </div>
-
-      {/* Buttons */}
-      <div className="flex gap-2">
-        <button
-          onClick={toggleCompleted}
-          className={`px-3 py-1 rounded-lg border text-sm ${
-            todo.completed
-              ? "border-green-500 text-green-600"
-              : "border-gray-300 text-gray-600"
-          } hover:bg-gray-100 transition`}
-        >
-          {todo.completed ? "Done" : "Mark"}
-        </button>
-        <button
-          onClick={deleteTodo}
-          className="px-3 py-1 rounded-lg border border-red-400 text-red-600 text-sm hover:bg-red-50 transition"
-        >
-          Delete
-        </button>
-      </div>
+        ×
+      </button>
     </div>
   );
 }
