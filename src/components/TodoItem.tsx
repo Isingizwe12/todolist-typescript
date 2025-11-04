@@ -1,4 +1,4 @@
-import React from "react";
+
 
 type TaskItemProps = {
   id: string;
@@ -43,7 +43,7 @@ export default function TaskItem({
         onClick={onDelete}
         className="text-red-500 hover:text-red-700 font-bold text-xl"
       >
-        ×
+        Delete
       </button>
     </div>
   );
